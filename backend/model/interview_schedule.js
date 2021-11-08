@@ -12,11 +12,11 @@ const interviewSchema = new mongoose.Schema({
     {
         type: String
     },
-    // participants:
-    // {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User_Collection'
-    // },
+    participants:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User_Collection'
+    }]
     
 
 },

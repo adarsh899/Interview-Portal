@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express();
 const config = require('./config/mongoose')
-
+const cors = require('cors')
 const routes = require('./routes')
+app.use(cors())
 app.use(express.urlencoded());
 app.use(express.json());
 app.use('/', routes);
