@@ -1,12 +1,16 @@
 # Interview-Portal
 
+## Description
+A simple app where admins can create interviews by selecting participants,
+interview start time and end time.
+
 ## Basic Requirements
 
-- An interview creation page where the admin can create an interview by selecting participants, start time and end time. Backend should throw error with proper error message if:
-  - Any of the participants is not available during the scheduled time (i.e, has another interview scheduled)
-  - No of participants is less than 2
-- An interviews list page where admin can see all the upcoming interviews.
-- Note: No need to add a page to create Users/Participants. Create them directly in the database
+1. An interview creation page where the admin can create an interview by selecting participants, start time and end time. Backend should throw error with proper error message if:
+2. Any of the participants is not available during the scheduled time (i.e, has another interview scheduled)
+3. No of participants is less than 2
+4. An interviews list page where admin can see all the upcoming interviews.
+5. Note: No need to add a page to create Users/Participants. Create them directly in the database.
 
 ### Setup
 To start the app
