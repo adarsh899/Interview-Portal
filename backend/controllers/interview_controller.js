@@ -313,9 +313,10 @@ module.exports.delete = async (req, res) =>
                 if (user)
                 {
                     
-                    Mailer.deletescheduler(user, interview);
+                   
                     const idx = user.interview_schedule.indexOf(interview._id)
                     if (idx != -1) {
+                        Mailer.deletescheduler(user, interview);
                         user.interview_schedule.splice(idx, 1);
                         user.save();
                     }
