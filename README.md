@@ -1,22 +1,15 @@
 # Interview-Portal
 
 ## Description
-A simple app where admins can create interviews by selecting participants,
+Interview Portal is Single Page Application where admins can schedule interviews by selecting participants,
 interview start time and end time.
-
-## Basic Requirements
-
-1. An interview creation page where the admin can create an interview by selecting participants, start time and end time. Backend should throw error with proper error message if:
-2. Any of the participants is not available during the scheduled time (i.e, has another interview scheduled)
-3. No of participants is less than 2
-4. An interviews list page where admin can see all the upcoming interviews.
-5. Note: No need to add a page to create Users/Participants. Create them directly in the database.
 
 ## Features
 
-1. Admin can create an interview by selecting participants, start time and end time.
-2. Participants of the interview scheduled will be notified through mail.
-3. Admin can see or edit the details, reschedule or cancel the interview.
+1. Admin can schedule an interview by selecting participants, start time and end time.
+2. An interviews list page where admin can see all the past, upcoming and present interviews. 
+3. Participants of the interview scheduled will be notified through mail.
+4. Admin can see or edit the details, reschedule or cancel the interview.
 
 ## Validations
 
@@ -24,7 +17,7 @@ interview start time and end time.
 2. It will notify the admin if number of participants is less than 2.
 3. It will notify the admin if the interview of selected participants is already scheduled selected time.
 
-### Setup
+### Installation
 To start the app
 1. `cd backend && npm install && npm start`
 2. In another terminal `cd backend/frontend/my-app && npm install && npm start`
