@@ -8,7 +8,12 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.use('/', routes);
 
-app.listen(5000, (err) => {
+const PORT = process.env.PORT || 5000
+if (process.env.NODE_ENV == "production") {
+    app.use(express.static(" frontend/my-app/build"));
+    
+}
+app.listen(PORT, (err) => {
     if (err)
         console.log("server is not working");
     else
