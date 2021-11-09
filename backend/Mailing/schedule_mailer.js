@@ -9,8 +9,7 @@ module.exports.scheduler = (user,interview) =>
     }, (err, info) => {
         if (err)
             console.log(err);
-        else
-            console.log(info);
+      
         return;
       });
     
@@ -25,8 +24,7 @@ module.exports.scheduler = (user,interview) =>
         }, (err, info) => {
             if (err)
                 console.log(err);
-            else
-                console.log(info);
+            
             return;
           });
         
@@ -41,8 +39,7 @@ module.exports.deletescheduler = (user,interview) =>
     }, (err, info) => {
         if (err)
             console.log(err);
-        else
-            console.log(info);
+        
         return;
       });
     
