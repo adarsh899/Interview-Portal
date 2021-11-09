@@ -4,36 +4,32 @@ import makeAnimated from "react-select/animated";
 import Axios from "axios"
 import Header from './Header';
 import { useHistory } from "react-router-dom";
+import Button from '@mui/material/Button';
+import { Input } from '@mui/material';
+import { Collapse } from '@mui/material'
+import { Alert } from '@mui/material';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-function Interview_Shcedule() {
+function Interview_Shcedule({interviewers}) {
 
     const animatedComponents = makeAnimated();
     const [date, setDate] = useState("");
     const [start_time, setStartTime] = useState("");
     const [end_time, setEndTime] = useState("");
     const [email, setEmail] = useState([]);
-    const [interviewers, setInterviewers] = useState([]);
     const [counter, setCounter] = useState(0);
+    const [message, setMessage] = useState("All fields are required.");
+    const [open2, setOpen2] = React.useState(false);
     const history = useHistory();
-    console.log("counter", counter);
-    console.log(email);
-    useEffect(() => {
-        Axios.get("http://localhost:5000/user/getUser").then((res) => {
-            // console.log(res);
-            setInterviewers(res.data.user)
-        }).catch((err) => {
-            console.log(err);
-        })
-    }, [])
+    
     const getOptions = (data) => {
-        console.log(data);
         const options = [];
         for (let d of data) {
           options.push({ label: d.email, value: d.email });
         }
         return options;
       };
-    console.log(interviewers);
 
         
     function inputData(e)
@@ -43,10 +39,9 @@ function Interview_Shcedule() {
         
         Axios.post("http://localhost:5000/user/schedule", {date,start_time,end_time,email})
             .then(res => {
-                // console.log(res);
-                alert(res.data.mess);
+                setMessage(res.data.mess);
             });
-         history.push("/");
+         
         
 
     }
@@ -54,35 +49,53 @@ function Interview_Shcedule() {
         
         <div>
             <Header/>
-            <h1>Schedule the Interview</h1>
-            <div className="SignUp">
-            <form className="SignUp_form" onSubmit={inputData}>
-                
+            
+            
+            <form className="reschedule_modals" onSubmit={inputData}>
+            <h3 style={{ textAlign: "center" }}>Schedule An Interview</h3> 
             <label>Choose Date : </label>
-                    <input type="date" placeholder="DD-MM-YY" required value={date} onChange={ (e)=>setDate(e.target.value)}/>
+                    <Input fullWidth={true} sx={{marginBottom:2}} type="date" placeholder="DD-MM-YY" required value={date} onChange={ (e)=>setDate(e.target.value)}/>
                     <label>Start Time : </label>
-                    <input type="time" placeholder="HH:MM" required value={start_time} onChange={ (e)=>setStartTime(e.target.value)}/>
+                    <Input sx={{marginBottom:2}} type="time" placeholder="HH:MM" required value={start_time} onChange={ (e)=>setStartTime(e.target.value)}/>
                     <label>End Time : </label>
-                    <input type="time" placeholder="HH:MM" required value={end_time} onChange={ (e)=>setEndTime(e.target.value)}/>
-                    <label>Select Interviewee : </label>
+                    <Input sx={{marginBottom:2}} type="time" placeholder="HH:MM" required value={end_time} onChange={ (e)=>setEndTime(e.target.value)}/>
+                    <label>Select Participants : </label>
                     <Select
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         isMulti
-                        options={getOptions(interviewers)}
+                        options={getOptions( interviewers )}
                         onChange={(selectedOption) => {
                             setEmail([...email,selectedOption[counter].value]);
                             setCounter(counter + 1);
                             
-              console.log("candidates selected", selectedOption);
             }}
                         />
                     
                     <br></br>
-                <button>Schedule</button>
+                <Button type="Submit" variant="contained" onClick={() => { setOpen2(true);if(message == "Interview schedule created"){setTimeout(()=>{history.push("/")},500)}}}>Schedule</Button>
             </form>
+            <Collapse in={open2}>
+                <Alert
+                    severity = "info"
+             style={{ top:78,right:2, position:"absolute" }}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => setOpen2(false)}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            {message}
+          </Alert>
+        </Collapse>
         </div>
-        </div>
+
+       
     )
 }
 

@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import React from 'react';
 import { Link } from "react-router-dom";
 function Header() {
@@ -5,10 +6,12 @@ function Header() {
         <nav>
             <div className="div-header">
                 <div className="heading">
-      <Link to="/"><h1>Interview Shcedule</h1></Link>
+                    <Link to="/"><Typography  variant="h5" >Interview Portal
+                    </Typography></Link>
       </div>
           <div className="schedule">
-           <Link to="/schedule" ><h3>Schedule Interview</h3></Link>
+           <Link to="/schedule" ><Typography  variant="h5" >Schedule Interview
+                    </Typography></Link>
           </div>
           </div>
         </nav>

@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react"
 import Header from './Header'
 import Axios from "axios"
-import Upcoming from "./Upcoming";
-import Past from "./Past"
 import BasicCard from "./Card";
+import { Skeleton, Typography } from "@mui/material";
 
 
 
-function Home() {
-    // const [present, setPresent] = useState([])
-    // const [upcoming, setUpcoming] = useState([]);
-    // const [past, setPast] = useState([]);
+function Home({interviewers}) {
+    
     let past = [];
     let upcoming = [];
     let present = [];
@@ -46,51 +43,37 @@ function Home() {
     
             if (y == cy && m == cm && d == cd) {
                 if (current_hour * 60 + current_min > en_hr * 60 + en_min && current_hour * 60 + current_min > st_hr * 60 + st_min) {
-                    //setPast([...past, schedule]);
                     past.push(schedule);
                     
                 }
                 else if (current_hour * 60 + current_min < en_hr * 60 + en_min && current_hour * 60 + current_min < st_hr * 60 + st_min) {
                     
-                    //setUpcoming([...upcoming, schedule]);
                     upcoming.push(schedule);
                 }
-                else if (current_hour * 60 + current_min < en_hr * 60 + en_min && current_hour * 60 + current_min > st_hr * 60 + st_min) {
-                    //setPresent([...present, schedule]);
+                else if (current_hour * 60 + current_min <= en_hr * 60 + en_min && current_hour * 60 + current_min >= st_hr * 60 + st_min) {
                     present.push(schedule);
                 }
             }
             else if (y < cy) {
                 past.push(schedule);
-               // setPast([...past, schedule]);
             }
             else if (y == cy && m < cm) {
                 past.push(schedule);
-                //setPast([...past, schedule]);
-                // return -1
             }
             else if (y == cy && m == cm && d < cd) {
                 past.push(schedule);
-               // setPast([...past, schedule]);
-                // return -1
             }
             else if (y > cy) {
                 upcoming.push(schedule);
                 
-               // setUpcoming([...upcoming, schedule]);
-                // return 1;
-
             }
             else if (y == cy && m > cm) {
                 upcoming.push(schedule);
-                //setUpcoming([...upcoming, schedule]);
-                // return 1;
             }
             else if (y == cy && m == cm && d > cd) {
                 
-               // setUpcoming([...upcoming, schedule]);
                 upcoming.push(schedule);
-                // return 1;
+                
             }
         
     }
@@ -103,55 +86,80 @@ function Home() {
     }
     
     useEffect(() => {
-         console.log("abc");
-       
+         
         fetched();
         
-            // .catch(err => {
-            // console.log(err);
-            //   })
     }, [counter])
-    console.log(storage.length);
+    
     if (storage.length)
     {
         
         for (let i = 0; i < storage.length; i++)
         {
             display(storage[i]);
-            //console.log(storage[i].date);
 
         }
     }
-    //console.log("dddd",counter);
-    //console.log(storage);
-    console.log("present",present);
-    console.log("upcoming",upcoming);
-    console.log("past",past);
+    
     return (
         <div>
             <Header />
-            <div className="maindiv">
-            
-            <h2>Upcoming Interview</h2>
-                {   
-                upcoming.map(schedule=>(<BasicCard schedule={schedule}/>))
-                }
-            
-            
-            <h2>Past Interview</h2>
-                {
-                past.map(schedule=>(<BasicCard schedule={schedule}/>))
-                }
-            
-            
-            <h2>Present Interview</h2>
-                {
-                present.map(schedule=>(<BasicCard schedule={schedule}/>))
-                }
-               
+            {storage.length == 0 ? (
+                <div className="maindiv">
+            <div>
+                <Typography  variant="h5" style={{textAlign:"center", padding:20}}>Past Interview</Typography>
+                        <Skeleton variant="rectangular" width={250} height={180} ></Skeleton>
+                        <br/>
+                        <Skeleton variant="rectangular" width={250} height={180} ></Skeleton>
+                        <br/>
+                        <Skeleton variant="rectangular" width = {250} height = {180} ></Skeleton>
+                </div>
+                <div>
+                <Typography  variant="h5" style={{textAlign:"center", padding:20}}>Present Interview</Typography>
+                        <Skeleton variant="rectangular" width={250} height={180} ></Skeleton>
+                        <br/>
+                        <Skeleton variant="rectangular" width={250} height={180} ></Skeleton>
+                        <br/>
+                        <Skeleton variant="rectangular" width = {250} height = {180} ></Skeleton>
+                </div>
+            <div>
+            <Typography  variant="h5" style={{textAlign:"center", padding:20}} >Upcoming Interview </Typography>
+                        <Skeleton variant="rectangular" width={250} height={180} ></Skeleton>
+                        <br/>
+                        <Skeleton variant="rectangular" width={250} height={180} ></Skeleton>
+                        <br/>
+                        <Skeleton variant="rectangular" width = {250} height = {180} ></Skeleton>
+                </div>
+                
+                
             </div>
-            {/* <BasicCard/> */}
-            {/* {storage && storage.map(schedule =>(display(schedule)  ))} */}
+            ) : (
+                <div className="maindiv">
+            <div>
+                <Typography  variant="h5" style={{textAlign:"center", padding:20}}>Past Interview</Typography>
+                {
+                    past.length>0?past.map(schedule=>(<BasicCard key= {schedule.id} schedule={schedule} interviewers={interviewers}/>)):(<Typography  variant="body5" style={{textAlign:"center", padding:20}}>No Past Interviews</Typography>)
+                }
+            </div>
+            <div>
+                <Typography  variant="h5" style={{textAlign:"center", padding:20}}>Present Interview</Typography>
+                {
+                    present.length>0?present.map(schedule=>(<BasicCard key= {schedule.id} schedule={schedule} interviewers={interviewers}/>)):(<Typography  variant="body5" style={{textAlign:"center", padding:20}}>No Interviews going on</Typography>)
+                    
+                }
+            </div>
+            <div>
+            <Typography  variant="h5" style={{textAlign:"center", padding:20}} >Upcoming Interview </Typography>
+                {
+                    upcoming.length>0?upcoming.map(schedule => (<BasicCard key={schedule.id} schedule={schedule} interviewers={interviewers}/>)):(<Typography  variant="body5" style={{textAlign:"center", padding:20}}>No Upcoming Interviews</Typography>)
+                }
+            </div>
+                
+                
+            </div>
+            )}
+            
+            
         </div>
     )
 }
