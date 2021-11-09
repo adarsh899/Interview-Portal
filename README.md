@@ -12,15 +12,24 @@ interview start time and end time.
 4. An interviews list page where admin can see all the upcoming interviews.
 5. Note: No need to add a page to create Users/Participants. Create them directly in the database.
 
+## Features
+
+1. Admin can create an interview by selecting participants, start time and end time.
+2. Participants of the interview scheduled will be notified through mail.
+3. Admin can see or edit the details, reschedule or cancel the interview.
+
+## Validations
+
+1. App will notify the admin if interview is scheduled before the current date or time.
+2. It will notify the admin if number of participants is less than 2.
+3. It will notify the admin if the interview of selected participants is already scheduled selected time.
+
 ### Setup
 To start the app
-1. `cd backend and npm install`
-2. `cd frontend and cd my-app and npm install`
-3. `cd .. and cd ..`
-4. `npm start`
-5. In another terminal `cd frontend && cd my-app and npm start`
+1. `cd backend && npm install && npm start`
+2. In another terminal `cd backend/frontend/my-app && npm install && npm start`
 
-### Project will open on port 3000
+### The frontend will open on Port 3000
 
 ## Screenshot
 
