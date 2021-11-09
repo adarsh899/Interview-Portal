@@ -7,6 +7,6 @@ router.post('/schedule', interviewcontroller.schedule);
 router.get('/getUser', usercontroller.getUsers);
 router.get('/getSchedule', interviewcontroller.getSchedule);
 router.put('/updateSchedule/:id', interviewcontroller.update);
-router.delete('/deleteSchedule/:id',interviewcontroller.delete),
+router.delete('/deleteSchedule/:id', interviewcontroller.delete);
 
 module.exports = router;
