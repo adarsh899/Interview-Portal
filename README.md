@@ -18,7 +18,8 @@ To start the app
 
 ### Project will open on port 3000
 
-###Screenshot
+## Screenshot
+
 ![int1](https://user-images.githubusercontent.com/42323781/140927163-09583e36-fcfb-4eed-bbcb-fe38fee07b0d.JPG)
 ![int2](https://user-images.githubusercontent.com/42323781/140927174-d41efeac-51bf-49ed-a82f-054c16537df8.JPG)
 ![int3](https://user-images.githubusercontent.com/42323781/140927185-f4de655a-6b03-45e5-a711-806660934056.JPG)
